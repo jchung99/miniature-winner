@@ -14,6 +14,6 @@ class Movie < ActiveRecord::Base
  
 end
   def self.sort_title
-    return Movie.order(:title)
+    return self.order(:title)
   end
 end
