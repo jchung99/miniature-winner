@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
     end
     
     if params[:sorted] == 1
-      @movies = @movies.sort_title()
+      @movies = Movie.sort_title()
     end
   end
 
