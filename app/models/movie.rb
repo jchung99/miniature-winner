@@ -14,6 +14,6 @@ class Movie < ActiveRecord::Base
  
 end
   def self.sort_title
-    return Movie.all.each[0]
+    return Movie.order(:title)
   end
 end
