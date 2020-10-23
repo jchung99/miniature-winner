@@ -10,6 +10,10 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     @all_ratings = Movie.all_ratings()
     @ratings_to_show = Array.new
+    if params["ratings"] != nil
+      @ratings_to_show = params["ratings"].keys()
+      @movies = Movie.filter_movies(@ratings_to_show)
+    end
     
     
   end
