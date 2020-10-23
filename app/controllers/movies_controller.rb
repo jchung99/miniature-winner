@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
       @movies = Movie.filter_movies(@ratings_to_show)
     end
     
-    if params["sorted"] == 1
+    if params[:sorted] == 1
       @movies = Movie.sort_title()
     end
   end
