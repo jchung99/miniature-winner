@@ -14,10 +14,10 @@ class MoviesController < ApplicationController
     @click_title = "hilite"
     @click_date = "hilite"
     if params[:click] == "title"
-      @click_title = "bg-warning"
+      @click_title = "hilite bg-warning"
     end
     if params[:click] == "date"
-      @click_date = "bg-warning"
+      @click_date = "hilite bg-warning"
     end
     if params["ratings"] != nil
       @ratings_to_show = params["ratings"].keys()
