@@ -10,10 +10,14 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     @all_ratings = Movie.all_ratings()
     @ratings_to_show = Array.new
-    @sorted
+    @sorted = params[:sorted] || session[:sorted]
     @movies = Movie.order(params[:sorted])
     @click_title = "hilite"
     @click_date = "hilite"
+    if session[:in_session] =="yes"
+      @ratings_to_show = session[:ratings]
+      @sorted = session[:sorted]
+    end
     if params[:click] == "title"
       @click_title = "hilite bg-warning"
     end
@@ -26,6 +30,7 @@ class MoviesController < ApplicationController
     end
     session[:ratings] = @ratings_to_show
     session[:sorted] = params[:sorted]
+    session[:in_session] = "yes"
 #     if params[:sorted] == 1
 #       @movies = Movie.order("title")
 #     end
