@@ -13,7 +13,7 @@ class Movie < ActiveRecord::Base
     to_ret
  
 end
-  def self.sort_title
-    return Movie.order(:title)
-  end
+#   def self.sort_title
+#     return sort()
+#   end
 end

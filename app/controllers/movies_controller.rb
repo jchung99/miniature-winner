@@ -10,14 +10,17 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     @all_ratings = Movie.all_ratings()
     @ratings_to_show = Array.new
+    @movies = Movie.order(params[:sorted])
     if params["ratings"] != nil
       @ratings_to_show = params["ratings"].keys()
       @movies = Movie.filter_movies(@ratings_to_show)
     end
     
-    if params[:sorted] == 1
-      @movies = @movies.sort_title()
-    end
+#     if params[:sorted] == 1
+#       @movies = Movie.order("title")
+#     end
+    
+    
   end
 
   def new
