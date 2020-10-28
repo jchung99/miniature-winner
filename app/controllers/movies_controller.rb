@@ -11,6 +11,8 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings()
     @ratings_to_show = Array.new
     @movies = Movie.order(params[:sorted])
+    @click_title = "hilite"
+    @click_date = "hilite"
     if params[:click] == "title"
       @click_title = "bg-warning"
     end
