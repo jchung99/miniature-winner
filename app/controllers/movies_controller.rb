@@ -10,6 +10,7 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     @all_ratings = Movie.all_ratings()
     @ratings_to_show = Array.new
+    @sorted
     @movies = Movie.order(params[:sorted])
     @click_title = "hilite"
     @click_date = "hilite"
@@ -23,7 +24,8 @@ class MoviesController < ApplicationController
       @ratings_to_show = params["ratings"].keys()
       @movies = Movie.filter_movies(@ratings_to_show)
     end
-    
+    session[:ratings] = @ratings_to_show
+    session[:sorted] = params[:sorted]
 #     if params[:sorted] == 1
 #       @movies = Movie.order("title")
 #     end
