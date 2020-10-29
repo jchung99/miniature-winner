@@ -10,14 +10,19 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     @all_ratings = Movie.all_ratings()
     @ratings_to_show = Array.new
-    @sorted = params[:sorted] || session[:sorted]
+    @sorted = params[:sorted]
     @movies = Movie.order(params[:sorted])
     @click_title = "hilite"
     @click_date = "hilite"
-    if session[:in_session] =="yes"
-      @ratings_to_show = session[:ratings]
-      @sorted = session[:sorted]
+    if params[:home] == "yes"
+      is_home = true
     end
+    @ratings_to_show = ['G','PG','PG-13','R']
+#     if session[:in_session] =="yes" and !is_home
+#       @ratings_to_show = session[:ratings]
+#       @sorted = session[:sorted]
+# #       redirect_to movies_path(:ratings => @ratings_to_show, :sorted => @sorted, :home => "yes")
+#     end
     if params[:click] == "title"
       @click_title = "hilite bg-warning"
     end
