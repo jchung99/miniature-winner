@@ -14,12 +14,15 @@ class MoviesController < ApplicationController
     @movies = Movie.order(params[:sorted])
     @click_title = "hilite"
     @click_date = "hilite"
+    
     if params[:home] == "yes"
       is_home = true
     end
     @ratings_to_show = @all_ratings
     if session[:ratings] != nil
       @ratings_to_show = session[:ratings]
+      @movies = Movie.filter_movies(@ratings_to_show)
+
     end
 #     if session[:in_session] =="yes" and !is_home
 #       @ratings_to_show = session[:ratings]
