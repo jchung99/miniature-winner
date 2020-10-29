@@ -17,7 +17,10 @@ class MoviesController < ApplicationController
     if params[:home] == "yes"
       is_home = true
     end
-    @ratings_to_show = ['G','PG','PG-13','R']
+    @ratings_to_show = @all_ratings
+    if session[:ratings] != nil
+      @ratings_to_show = session[:ratings]
+    end
 #     if session[:in_session] =="yes" and !is_home
 #       @ratings_to_show = session[:ratings]
 #       @sorted = session[:sorted]
@@ -32,8 +35,9 @@ class MoviesController < ApplicationController
     if params["ratings"] != nil
       @ratings_to_show = params["ratings"].keys()
       @movies = Movie.filter_movies(@ratings_to_show)
+      session[:ratings] = @ratings_to_show
     end
-    session[:ratings] = @ratings_to_show
+    
     session[:sorted] = params[:sorted]
     session[:in_session] = "yes"
 #     if params[:sorted] == 1
