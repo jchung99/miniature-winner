@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
     @all_ratings = Movie.all_ratings()
-    @ratings_to_show = Array.new
+    
     @sorted = params[:sorted]
     @movies = Movie.order(params[:sorted])
     @click_title = "hilite"
@@ -19,10 +19,10 @@ class MoviesController < ApplicationController
       is_home = true
     end
     @ratings_to_show = @all_ratings
-    if session[:ratings] != nil
+    if params[:ratings] == nil
       @ratings_to_show = session[:ratings]
-#       redirect_to movies_path(:ratings=> @ratings_to_show, :sorted => "title")
-      @movies = Movie.filter_movies(@ratings_to_show)
+      redirect_to movies_path(:ratings=> @ratings_to_show, :sorted => "title")
+#       @movies = Movie.filter_movies(@ratings_to_show)
 
     end
 #     if session[:in_session] =="yes" and !is_home
@@ -37,7 +37,7 @@ class MoviesController < ApplicationController
       @click_date = "hilite bg-warning"
     end
     if params["ratings"] != nil
-      @ratings_to_show = params["ratings"].keys()
+      @ratings_to_show = params["ratings"]
       @movies = Movie.filter_movies(@ratings_to_show)
       session[:ratings] = @ratings_to_show
     end
